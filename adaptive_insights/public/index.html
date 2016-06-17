@@ -1,0 +1,139 @@
+<!DOCTYPE>
+<html ng-app="app">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/darul75/ng-prettyjson/master/dist/ng-prettyjson.min.css">
+        <link rel="stylesheet" href="app.css">
+        <title>
+            Adaptive
+        </title>
+    </head>
+    <body>
+        <div class="container" ng-controller="appCtrl as ctrl">
+            <h1>Pre employment Technical Screening - Engineering</h1>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Problem 1 and Problem 2</h3>
+                </div>
+                <div class="panel-body">
+                    <button class="btn btn-primary" ng-click="ctrl.getData()">Get Data</button>
+                    <pre pretty-json="ctrl.data" />
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Problem 3 : Given a node id, returns the label string of the node with the matching id.</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="frmSearchNode">
+                        <div class="col-lg-6 col-xs-12">
+                            <div class="input-group">
+                                <input name="searchNodeId" type="number" class="form-control" placeholder="Node Id" ng-model="ctrl.search.id" ng-change="ctrl.search.status = 0" 
+                                    required ng-class="{'has-error': frmSearchNode.searchNodeId.$touched && frmSearchNode.searchNodeId.$invalid}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="ctrl.findNode(frmSearchNode)">Find</button>
+                                </span>
+                            </div>
+                            <div ng-messages="frmSearchNode.searchNodeId.$error" ng-if="frmSearchNode.searchNodeId.$touched" class="error-helper">
+                                <span ng-message="required">Please provide node Id to search.</span>
+                            </div>
+                        </div>
+                    </form>
+                    <h3 class="col-xs-12" ng-hide="ctrl.search.status == 0">
+                        <span  ng-show="ctrl.search.status == 2" class="label label-warning">Searching...</span>
+                        <span  ng-show="ctrl.search.status == -1" class="label label-danger"> Couldn't find node with Id : {{ctrl.search.id}}</span>
+                        <span  ng-show="ctrl.search.status == 1 && ctrl.search.label == undefined" class="label label-danger"> 
+                            No label found for node with Id : {{ctrl.search.id}}
+                        </span>
+                        <span  ng-show="ctrl.search.status == 1 && ctrl.search.label != undefined" class="label label-success"> 
+                            Found label : {{ctrl.search.label}} for node with Id : {{ctrl.search.id}}
+                        </span>
+                    </h3>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Problem 4</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="frmProfile" class="col-xs-6" novalidate>
+                        <p class="form-group">
+                            <label>Name</label>
+                            <input name="name" type="text" ng-model="ctrl.profile.name" class="form-control" required minlength="1" maxlength="100" 
+                                ng-pattern="/^[A-Za-z]*$/" ng-class="{'has-error': frmProfile.name.$touched && frmProfile.name.$invalid}">
+                            <div ng-messages="frmProfile.name.$error" ng-if="frmProfile.name.$touched" class="error-helper">
+                                <span ng-message="required">Name is required.</span>
+                                <span ng-message="pattern">Only aplha value accepted.</span>
+                                <span ng-message="minlength">Name is too short - mininum 1 character required.</span>
+                                <span ng-message="maxlength">Name is too long - maximum 100 characters.</span>
+                            </div>
+                        </p>
+                        <p class="form-group">
+                            <label>Address1</label>
+                            <input name="address1" type="text" ng-model="ctrl.profile.address1" class="form-control" required minlength="1" maxlength="100" 
+                                ng-class="{'has-error': frmProfile.address1.$touched &&  frmProfile.address1.$invalid}">
+                            <div ng-messages="frmProfile.address1.$error" ng-if="frmProfile.address1.$touched" class="error-helper">
+                                <span ng-message="required">Address1 is required.</span>
+                                <span ng-message="minlength">Address1 is too short - mininum 1 character required.</span>
+                                <span ng-message="maxlength">Address1 is too long - maximum 100 characters.</span>
+                            </div>
+                        </p>
+                        <p class="form-group">
+                            <label>Address2</label>
+                            <input name="address2" type="text" ng-model="ctrl.profile.address2" class="form-control" maxlength="100">
+                            <div ng-messages="frmProfile.address2.$error" ng-if="frmProfile.address2.$touched" class="error-helper">
+                                <span ng-message="maxlength">Address2 is too long - maximum 100 characters.</span>
+                            </div>
+                        </p>
+                        <p class="form-group">
+                            <label>City</label>
+                            <input name="city" type="text" ng-model="ctrl.profile.city" class="form-control" required minlength="1" maxlength="50" 
+                                ng-class="{'has-error': frmProfile.city.$touched &&  frmProfile.city.$invalid}">
+                            <div ng-messages="frmProfile.city.$error" ng-if="frmProfile.city.$touched" class="error-helper">
+                                <span ng-message="required">City is required.</span>
+                                <span ng-message="minlength">City is too short - mininum 1 character required.</span>
+                                <span ng-message="maxlength">City is too long - maximum 50 characters.</span>
+                            </div>
+                        </p>
+                        <p class="form-group">
+                            <label>State</label>
+                            <select name="state" ng-model="ctrl.profile.state" class="form-control" required 
+                                ng-class="{'has-error': frmProfile.state.$touched &&  frmProfile.state.$invalid}">
+                                <option ng-repeat="state in ctrl.states" value="{{state}}" >{{state}}</option>
+                            </select>
+                             <div ng-messages="frmProfile.state.$error" ng-if="frmProfile.state.$touched" class="error-helper">
+                                <span ng-message="required">State is required.</span>
+                            </div>
+                        </p>  
+                        <p class="form-group">
+                            <label>Zip Code</label>
+                            <input name="zip_code" type="number" ng-model="ctrl.profile.zip_code" class="form-control" required minlength="5" maxlength="5" 
+                                ng-class="{'has-error': frmProfile.zip_code.$touched &&  frmProfile.zip_code.$invalid}">
+                            <div ng-messages="frmProfile.zip_code.$error" ng-if="frmProfile.city.$touched" class="error-helper">
+                                <span ng-message="required">Zip Code is required.</span>
+                                <span ng-message="minlength">Zip Code is too short - mininum 5 digits required.</span>
+                                <span ng-message="maxlength">Zip Code is too long - maximum 5 digits.</span>
+                            </div>
+                        </p>
+                        <div class="float-right">
+                            <button class="btn btn-default" ng-click="ctrl.cancel(frmProfile)">Cancel</button>
+                            <button class="btn btn-primary" ng-click="ctrl.ok(frmProfile)">OK</button>
+                        </div>
+                    </form>
+                    <label>Form Data</label>
+                    <pre class="col-xs-6" pretty-json="ctrl.profile" />
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" 
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" 
+            crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+        <script src="https://cdn.rawgit.com/darul75/ng-prettyjson/master/dist/ng-prettyjson.min.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>

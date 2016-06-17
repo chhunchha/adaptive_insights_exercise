@@ -1,0 +1,14 @@
+.float-right {
+    float: right;
+}
+
+.has-error {
+    border: 1px solid #f00;
+}
+
+.error-helper {
+    font-size: 12px;
+    font-style: italic;
+    text-align: right;
+    color: #f00;
+}
