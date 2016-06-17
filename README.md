@@ -1,11 +1,8 @@
 # Adaptive Insights - Pre employment Technical Screening - Engineering
 
-**Sumant Chhunchha**
-
-**mr.chhunchha@gmail.com**
-
-**https://github.com/chhunchha/adaptive_insights_exercise/**
-
+**Sumant Chhunchha**  
+**mr.chhunchha@gmail.com**  
+**https://github.com/chhunchha/adaptive_insights_exercise/**  
 
 Single page application which shows answers/implementation for all 4 problem statements. 
 Implemented using Angular, Bootstrap and Node.

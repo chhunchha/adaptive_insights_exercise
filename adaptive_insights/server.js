@@ -19,6 +19,7 @@ function errorHandler(err, req, res, next) {
     res.status(500).render("error_template", { error: err});
 }
 
+
 app.get('/data', function(req, res, next) {
     var data = {  
         "id": 1,
