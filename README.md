@@ -6,7 +6,7 @@
 
 Single page application which shows answers/implementation for all 4 problem statements. 
 Implemented using Angular, Bootstrap and Node.
-
+Bootstrap for responsive web design.
 
 ```
 > cd adaptive_insights
@@ -16,6 +16,10 @@ Implemented using Angular, Bootstrap and Node.
 http://localhost:3000/
 ```
 
+```
+application JS file-  adaptive_insights/public/app.js
+application index page - adaptive_insights/public/index.html
+```
 ## Problem 1
 
 ```javascript
@@ -64,7 +68,7 @@ var data = {
 ```
 
 
-## Problem 2
+## Problem 2 
 
 Click on Get Data button which will send Get request to get data.  
 You should see data below button in pretty json format  
