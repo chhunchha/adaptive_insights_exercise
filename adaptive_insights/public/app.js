@@ -48,15 +48,18 @@ function AppCtrl($scope, $http) {
         function traverseObject(obj) {
             if(Object.keys(obj).length != 0) {
                 for(var key in obj) {
-
+                    // console.log(obj["id"]);
                     if(obj["id"] == ctrl.search.id) {
                         ctrl.search.status = 1;
                         ctrl.search.label = obj["label"];
-                        break;
+                        return true;
                     }
 
                     if(typeof obj[key] === "object") {
-                        traverseObject(obj[key]);
+                        var found = traverseObject(obj[key]);
+                        if(found) {
+                            return;
+                        }
                     }
                 }
             } 
